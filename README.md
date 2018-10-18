@@ -1,0 +1,2 @@
+# ListaObowiazkow
+Projekt
