@@ -1,0 +1,8 @@
+# app/config/parameters.yml
+parameters:
+  database_driver:    pdo_mysql
+  database_host:      s48.linuxpl.com/phpmyadmin
+  database_name:      mjaw_fundacja
+  database_user:      mjaw_fundacja
+  database_password:  !Fundacja123
+#...
