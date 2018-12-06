@@ -32,9 +32,9 @@ class Favourites
     private $pet;
 
     /**
-     * @var \Guest
+     * @var \Guests
      *
-     * @ORM\ManyToOne(targetEntity="Guest")
+     * @ORM\ManyToOne(targetEntity="Guests")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="guest_id", referencedColumnName="guest_id")
      * })
@@ -58,12 +58,12 @@ class Favourites
         return $this;
     }
 
-    public function getGuest(): ?Guest
+    public function getGuest(): ?Guests
     {
         return $this->guest;
     }
 
-    public function setGuest(?Guest $guest): self
+    public function setGuest(?Guests $guest): self
     {
         $this->guest = $guest;
 

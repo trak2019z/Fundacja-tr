@@ -26,49 +26,49 @@ class Permissions
      *
      * @ORM\Column(name="add_pets", type="boolean", nullable=true)
      */
-    private $addPets = '0';
+    private $addPets;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(name="edit_pets", type="boolean", nullable=true)
      */
-    private $editPets = '0';
+    private $editPets;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(name="delete_pets", type="boolean", nullable=true)
      */
-    private $deletePets = '0';
+    private $deletePets;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(name="move_pets", type="boolean", nullable=true)
      */
-    private $movePets = '0';
+    private $movePets;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(name="add_debt", type="boolean", nullable=true)
      */
-    private $addDebt = '0';
+    private $addDebt;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(name="change_debt", type="boolean", nullable=true)
      */
-    private $changeDebt = '0';
+    private $changeDebt;
 
     /**
      * @var bool|null
      *
      * @ORM\Column(name="accept_reservation", type="boolean", nullable=true)
      */
-    private $acceptReservation = '0';
+    private $acceptReservation;
 
     /**
      * @var \Workers

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Workers
@@ -32,6 +33,7 @@ class Workers
      * @var string
      *
      * @ORM\Column(name="surname", type="string", length=40, nullable=false)
+     * @Assert\NotBlank()
      */
     private $surname;
 
@@ -39,8 +41,17 @@ class Workers
      * @var string
      *
      * @ORM\Column(name="position", type="string", length=40, nullable=false)
+     * @Assert\NotBlank()
      */
     private $position;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_of_birth", type="date", nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $dateOfBirth;
 
     /**
      * @var \Logging
@@ -49,6 +60,8 @@ class Workers
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="logging_id", referencedColumnName="logging_id")
      * })
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      */
     private $logging;
 
@@ -89,6 +102,18 @@ class Workers
     public function setPosition(string $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getDateOfBirth(): ?\DateTimeInterface
+    {
+        return $this->dateOfBirth;
+    }
+
+    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
+    {
+        $this->dateOfBirth = $dateOfBirth;
 
         return $this;
     }

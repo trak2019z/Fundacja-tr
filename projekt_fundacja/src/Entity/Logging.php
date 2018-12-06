@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Logging
@@ -32,6 +33,8 @@ class Logging
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=20, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $password;
 
@@ -39,6 +42,7 @@ class Logging
      * @var string|null
      *
      * @ORM\Column(name="type_of_account", type="string", length=15, nullable=true, options={"default"="guest"})
+     * @Assert\NotBlank()
      */
     private $typeOfAccount = 'guest';
 

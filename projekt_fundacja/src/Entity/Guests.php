@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Guest
+ * Guests
  *
- * @ORM\Table(name="guest", indexes={@ORM\Index(name="logging_id", columns={"logging_id"})})
+ * @ORM\Table(name="guests", indexes={@ORM\Index(name="logging_id", columns={"logging_id"})})
  * @ORM\Entity
  */
-class Guest
+class Guests
 {
     /**
      * @var int

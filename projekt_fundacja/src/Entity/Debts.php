@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Debt
+ * Debts
  *
- * @ORM\Table(name="debt", indexes={@ORM\Index(name="pet_id", columns={"pet_id"})})
+ * @ORM\Table(name="debts", indexes={@ORM\Index(name="pet_id", columns={"pet_id"})})
  * @ORM\Entity
  */
-class Debt
+class Debts
 {
     /**
      * @var int
