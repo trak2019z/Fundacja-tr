@@ -9,6 +9,7 @@
 namespace App\Form\Type;
 
 use App\Entity\Logging;
+use App\Entity\Permissions;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -45,6 +46,11 @@ class AddWorkerType extends AbstractType
             ))
             ->add('daneLogowania', RegisterUserType::class, array(
                 'data_class' => Logging::class,
+            ))
+            ->add('checkboxPracownik', PermissionsType::class, array(
+                'data_class' => Permissions::class,
+                'label' => "Uprawnienia pracownika"
+
             ))
             ->add('zapiszPracownika', SubmitType::class, array(
                 'label' => "Zapisz pracownika"

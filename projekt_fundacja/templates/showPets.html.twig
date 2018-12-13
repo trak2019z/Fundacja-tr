@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <a href="{{ path('strona_zwierzaki') }}">WSTECZ</a>
+    <div class="sides">
+        {% for  pet in zwierzaki %}
+            <div class="left">
+                <div>
+                    <label class="pet_left">{{ pet['nazwa'] }} </label>
+                    <label class="pet_right"> {{ pet['numer'] }}</label>
+                </div>
+                <div>
+                    <img src="animals\{{ pet['zdjecie'] }}" alt="zdjecie" width="200" height="200"/>
+                </div>
+                <div>
+                    <label
+                        {% if pet['stan'] == 'dostępny' %}
+                             class="pet_left kolor_dostepny"
+                        {% else %}
+                            class="pet_left kolor_niedostepny"
+                        {% endif %}
+                            >{{ pet['stan'] }}
+                    </label>
+                    <label class="pet_right">{{ pet['data'] }}</label>
+                </div>
+                <div>
+                    <a href="{{ path('wyswietl_zwierzaka', {'id': pet['id'] }) }}">WIĘCEJ</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

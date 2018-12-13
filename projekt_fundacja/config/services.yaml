@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    animals_photos: '%kernel.project_dir%/public/animals'
+    animals_additional: '%kernel.project_dir%/public/animals_more'
 
 services:
     # default configuration for services in *this* file
@@ -26,3 +28,4 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+

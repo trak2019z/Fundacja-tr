@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="sides">
+        {% for pets in zwierzaki %}
+            <div class="left">
+                <div>
+                    <label class="pet_left">
+                        {{ pets['nazwa'] }}
+                    </label>
+                    <label class="pet_right">
+                        {{ pets['numer'] }}
+                    </label>
+                </div>
+                <div>
+                    <img src="animals\{{ pets['zdjecie'] }}" alt="zdjecie" height="200" width="200"/>
+                </div>
+                <div>
+                    <label class="pet_left">
+                        {{ pets['data_ur'] }}
+                    </label>
+                    <label class="pet_right">
+                        {{ pets['data_zm'] }}
+                    </label>
+                </div>
+                <div>
+                    <a href="{{ path('wyswietl_zwierzaka', {'id': pets['id'] }) }}">WIĘCEJ</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
