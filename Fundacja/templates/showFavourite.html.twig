@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="btn-fav back">
+        <a href="{{ path('account') }}">WSTECZ</a>
+    </div>
+    <div class="sides">
+        {% set zmienna = false %}
+        {% for  pet in zwierzaki %}
+            <div class="left">
+                <div>
+                    <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">{{ pet['nazwa'] }} </label>
+                    <label class="col-md-6" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;"> {{ pet['nr'] }}</label>
+                    {% set zmienna = true %}
+                </div>
+                <div>
+                    <img src="animals\{{ pet['zdjecie'] }}" alt="zdjecie" style="width:200px; height:150px;"/>
+                </div>
+                <div>
+                    <label
+                            {% if pet['stan'] == 'dostępny' %}
+                                class="col-md-4" kolor_dostepny" style="padding-left: 0px; padding-right: 0px;"
+                            {% else %}
+                                class="col-md-4" kolor_niedostepny" style="padding-left: 0px; padding-right: 0px;"
+                            {% endif %}
+                    >{{ pet['stan'] }}
+                    </label>
+                    <label class="col-md-8" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;">{{ pet['data_ur'] }}</label>
+                </div>
+                <div>
+				<div class="btn-fav wiecej">
+                    <a href="{{ path('wyswietl_zwierzaka', {'id': pet['id'] }) }}">WIĘCEJ</a>
+                </div>
+				<div class="btn-fav rezerwuj">
+					<a href="{{ path('dodajRezerwacje', {'pet': pet['id']}) }}">REZERWUJ</a>
+                </div>
+				</div>
+            </div>
+        {% endfor %}
+        {% if zmienna == false %}
+            <h4>Nie masz ulubionych pupili.</h4>
+        {% endif %}
+    </div>
+{% endblock %}

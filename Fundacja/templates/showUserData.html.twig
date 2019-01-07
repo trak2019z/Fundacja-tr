@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div>
+        <label> Imię: </label>
+        <label> {{ tablica['imie'] }} </label>
+    </div>
+    <div>
+        <label>Nazwisko: </label>
+        <label> {{ tablica['nazwisko'] }}</label>
+    </div>
+    {% if typ is same as("worker") %}
+        <div>
+            <label> Data urodzenia: </label>
+            <label> {{ tablica['data'] }}</label>
+        </div>
+        <div>
+            <label> Stanowisko: </label>
+            <label> {{ tablica['pozycja'] }}</label>
+        </div>
+    {% endif %}
+    <div>
+        <label>Email: </label>
+        <label> {{ tablica['email'] }}</label>
+    </div>
+    <div class="btn-fav edytuj">
+        <a href="{{ path('zmienHasloUzytkownika') }}"> ZMIEŃ HASŁO</a>
+    </div>
+    {% if typ is same as("guest")%}
+        <div class="btn-fav delete">
+            <a href="{{ path('usunkonto') }}"> USUŃ KONTO </a>
+        </div>
+    {% endif %}
+	<div class="btn-fav back">
+    <a href="{{ path('account') }}">WSTECZ</a>
+	</div>
+{% endblock %}

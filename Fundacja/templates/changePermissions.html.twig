@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.checkbox) }}
+        {{ form_row(form.akceptuj) }}
+
+        <div class="btn-fav back">
+            <a href="{{ path('wszyscyPracownicy') }}">ANULUJ</a>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

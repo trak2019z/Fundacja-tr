@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="btn-fav back">
+        <a href="{{ path('account') }}">WSTECZ</a>
+    </div>
+    <div class="sides flowroot">
+        <div class="sides flowroot" style="width:100%;">
+            <h2>Rezerwacje do zatwierdzenia:</h2>
+            {% for  rezerw in rezerwacje %}
+                {% if rezerw['status'] is same as("unknown")%}
+                    <div class="left">
+                        <div>
+                            <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">{{ rezerw['nazwa'] }} </label>
+                            <label class="col-md-6" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;"> {{ rezerw['numer'] }}</label>
+                        </div>
+                        <div>
+                            <img src="animals\{{ rezerw['glowne'] }}" alt="zdjecie" style="width:200px; height:150px;"/>
+                        </div>
+                        <div>
+                            <label class="col-md-12" style="padding-left: 0px; padding-right: 0px;">Rezerwujący:  </label>
+                            <label class="col-md-12" style="padding-left: 0px; padding-right: 0px;"> {{ rezerw['imie'] }} {{ rezerw['nazwisko'] }}</label>
+                        </div>
+                        <div>
+                            <div class="btn-fav zdjecia">
+                                <a href="{{ path('akceptacjarezerwacji', {'id': rezerw['id']}) }}">ZARZĄDZAJ</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <br>
+        <div class="sides flowroot" style="width:100%;">
+            <h2>Rezerwacje do usunięcia:</h2>
+            {% for  rezerw in rezerwacje %}
+                {% if rezerw['usun'] is same as("tak") %}
+                    <div class="left">
+                        <div>
+                            <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">{{ rezerw['nazwa'] }} </label>
+                            <label class="col-md-6" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;"> {{ rezerw['numer'] }}</label>
+                        </div>
+                        <div>
+                            <img src="animals\{{ rezerw['glowne'] }}" alt="zdjecie" style="width:200px; height:150px;"/>
+                        </div>
+                        <div>
+                            <label class="col-md-12" style="padding-left: 0px; padding-right: 0px;">Rezerwujący:  </label>
+                            <label class="col-md-12" style="padding-left: 0px; padding-right: 0px;"> {{ rezerw['imie'] }} {{ rezerw['nazwisko'] }}</label>
+                        </div>
+                        <div>
+                            <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;"> {{ rezerw['dokiedy'] }} </label>
+                        </div>
+                        <div>
+
+                            <div class="btn-fav zdjecia">
+                                <a href="{{ path('przedluzRezerwacje', {'id': rezerw['id']}) }}">ZARZĄDZAJ</a>
+                            </div>
+                            <div class="btn-fav delete">
+                                <a href="{{ path('usunrezerwacje', {'id': rezerw['id'] }) }}">USUŃ</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <br>
+        <div class="sides flowroot" style="width:100%;">
+            <h2>Rezerwacje zatwierdzone:</h2>
+            {% for  rezerw in rezerwacje %}
+                {% if rezerw['status'] is same as("accept")%}
+                    {% if rezerw['usun'] is same as("nie") %}
+                        <div class="left">
+                            <div>
+                                <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">{{ rezerw['nazwa'] }} </label>
+                                <label class="col-md-6" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;"> {{ rezerw['numer'] }}</label>
+                            </div>
+                            <div>
+                                <img src="animals\{{ rezerw['glowne'] }}" alt="zdjecie" style="width:200px; height:150px;"/>
+                            </div>
+                            <div>
+                                <label class="col-md-12" style="padding-left: 0px; padding-right: 0px;">Rezerwujący:  </label>
+                                <label class="col-md-12" style="padding-left: 0px; padding-right: 0px;"> {{ rezerw['imie'] }} {{ rezerw['nazwisko'] }}</label>
+                            </div>
+                            <div>
+                                <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">Rezerwacja do: {{ rezerw['dokiedy'] }} </label>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

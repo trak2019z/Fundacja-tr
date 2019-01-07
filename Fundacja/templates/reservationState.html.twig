@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="http://mjaw.ayz.pl/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="http://mjaw.ayz.pl/css/styles.css">
+    <link rel="stylesheet" href="http://mjaw.ayz.pl/css/checkbox.css">
+    <link rel="stylesheet" href="http://mjaw.ayz.pl/css/AddPetStyle.css">
+    <link rel="stylesheet" href="http://mjaw.ayz.pl/vendor/fontawesome/css/font-awesome.min.css">
+{% endblock %}
+{% block body %}
+    <div class="btn-fav back">
+        <a href="{{ path('wyswietlWszystkieRezerwacje') }}">WSTECZ</a>
+    </div>
+    {{ form_start(form) }}
+    <div>
+        {{ form_label(form.rezerwacja, null, {'label_attr': {'class': 'form-base'}}) }}
+        {{ form_widget(form.rezerwacja, {'attr': {'class': 'form-base form-input'}}) }}
+    </div>
+    <div>
+		<div id="dokiedy" style="display: block;">
+		    {{ form_label(form.dokiedy, null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form.dokiedy, {'attr': {'class': 'data form-datepicker'}, 'type' : 'date' }) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.getElementById("reservation_rezerwacja").onchange = UpdateForm;
+
+        function UpdateForm() {
+            if(document.getElementById("reservation_rezerwacja").value != "accept" ){
+                document.getElementById("dokiedy").style.display = "none";
+            }else {
+                document.getElementById("dokiedy").style.display = "block";
+            }
+        }
+    </script>
+{% endblock %}

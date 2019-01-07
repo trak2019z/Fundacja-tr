@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+        <div>
+			<div>
+				{{ form_label(form.imie, null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.imie, {'attr': {'class': 'form-base form-input'}}) }}
+			</div>
+			<div>
+			    {{ form_label(form.nazwisko, null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.nazwisko, {'attr': {'class': 'form-base form-input'}}) }}
+			</div>
+        </div>
+        <div>
+			{{ form_row(form.akceptuj) }}
+			<div class="btn-fav back">
+				<a href="{{ path('account') }}"> ANULUJ</a>
+			</div>
+        </div>
+    {{ form_end(form) }}
+{%  endblock %}

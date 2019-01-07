@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="btn-fav back">
+        <a href="{{ path('account') }}">WSTECZ</a>
+    </div>
+    {% if zwierzaki is defined %}
+        <div class="left">
+            <div>
+                <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">{{ zwierzaki['nazwa'] }} </label>
+                <label class="col-md-6" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;"> {{ zwierzaki['nr'] }}</label>
+            </div>
+            <div>
+                <img src="animals\{{ zwierzaki['zdjecie'] }}" alt="zdjecie" style="width:400px; height:300px;"/>
+            </div>
+            <div>
+                <label class="col-md-4" style="padding-left: 0px; padding-right: 0px;">Data urodzenia: {{ zwierzaki['data_ur'] }}  </label>
+            </div>
+            {% if rezerwacja['status'] is same as("unknown") %}
+                <div>
+                    <label class="col-md-4" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;">Czeka na akceptację. </label>
+                </div>
+            {% else %}
+                <div>
+                    <label class="col-md-4">Zaakceptowany. </label>
+                </div>
+                <div>
+                    <label class="col-md-4">Rezerwacja do: {{ rezerwacja['dokiedy'] }} </label>
+                </div>
+            {% endif %}
+
+        </div>
+
+    {% else %}
+        <h3>Brak rezerwacji.</h3>
+    {% endif %}
+
+{% endblock %}

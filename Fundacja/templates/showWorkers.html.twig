@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="btn-fav back">
+        <a href="{{ path('account') }}">WSTECZ</a>
+    </div>
+    <div class="sides">
+        {% set zmienna = 1 %}
+        {% for pracownik in pracownicy %}
+            <div class="left" style="
+            {% if zmienna == 1 %}
+                    background: #f3f081;
+                {% set zmienna = 2 %}
+            {% elseif zmienna == 2 %}
+                    background: #8be9ef;
+                {% set zmienna = 3 %}
+            {% elseif zmienna == 3 %}
+                    background: #f398e3;
+                {% set zmienna = 4 %}
+            {% else %}
+                    background: #99f3b1;
+                {% set zmienna = 1 %}
+            {% endif %}
+                        margin: 10px; padding: 10px; border-radius: 10px">
+                <div>
+                    <label> {{ pracownik['imie'] }}</label>
+                    <label> {{ pracownik['nazwisko'] }}</label>
+                </div>
+                <div>
+                    <label> {{ pracownik['pozycja'] }}</label>
+                </div>
+                <div>
+                <div class="btn-fav delete">
+                    <a href="{{ path('usunPracownika', {'id': pracownik['id']}) }}">USUŃ</a>
+                </div>
+                <div class="btn-fav rezerwuj">
+                    <a href="{{ path('zmianaUprawnien', {'id': pracownik['id']}) }}">ZMIEŃ UPRAWNIENIA</a>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

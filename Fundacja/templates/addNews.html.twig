@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+        <div>
+			{{ form_label(form["tytul"], null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form["tytul"], {'attr': {'class': 'form-base form-input'}}) }}
+		</div>	
+        <div>
+			{{ form_label(form["opis"], null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form["opis"], {'attr': {'class': 'form-base form-input'}}) }}
+		</div>
+		<div>
+			{{ form_row(form.zapisz) }}
+			<div class="btn-fav back">
+				<a href="{{ path('wyswietl_zwierzaka', {'id': id})  }}">ANULUJ</a>
+			</div>
+		</div>
+    {{ form_end(form) }}
+{% endblock %}

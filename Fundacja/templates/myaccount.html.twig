@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% if konto is same as("guest") %}
+	<div class="btn-fav rezerwuj">
+        <a href="{{ path('myAccountInfo') }}">Moje dane</a>
+	</div>
+	<div class="btn-fav edytuj">
+        <a href="{{ path('editUserData') }}">Edytuj dane</a>
+	</div>
+	<div class="btn-fav zdjecia">
+        <a href="{{ path('pokazUlubione') }}">Ulubione</a>
+	</div>
+	<div class="btn-fav add">
+        <a href="{{ path('wyswietlRezerwacje') }}">Rezerwacje</a>
+	</div>
+    {% elseif konto is same as("worker") %}
+	<div class="btn-fav rezerwuj">
+        <a href="{{ path('myAccountInfo') }}">Moje dane</a>
+	</div>
+	<div class="btn-fav edytuj">
+        <a href="{{ path('editUserData') }}">Edytuj dane</a>
+	</div>
+        {% if uprawnienia['dodajzwierzaka'] == 1 %}
+		<div class="btn-fav add">
+             <a href="{{ path('dodanieZwierzakaFormularz') }}">Dodaj zwierzaka</a>
+		</div>
+		{% endif %}
+        {% if uprawnienia['akceptujrezerwacje'] == 1 %}
+		<div class="btn-fav zdjecia">
+            <a href="{{ path('wyswietlWszystkieRezerwacje') }}">Rezerwacje</a>
+		</div>
+        {% endif %}
+    {% else %}
+	<div class="btn-fav edytuj">
+        <a href="{{ path('dodaniePracownikaFormularz') }}">Dodaj pracownika</a>
+	</div>
+	<div class="btn-fav back">
+        <a href="{{ path('wszyscyPracownicy') }}">Wszyscy pracownicy</a>
+	</div>
+	<div class="btn-fav delete">
+        <a href="{{ path('zmienHasloUzytkownika') }}">Zmień hasło</a>
+	</div>
+    {% endif %}
+{% endblock %}

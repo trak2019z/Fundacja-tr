@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+    <div>
+        {{ form_row(form.zmniejszenieDlugu) }}
+        {{ form_row(form.zwiekszenieDlugu) }}
+    </div>
+    <div>
+        {{ form_widget(form.akceptuj) }}
+        <div class="btn-fav back">
+            <a href="{{ path('wyswietl_zwierzaka', {'id': id})  }}">ANULUJ</a>
+        </div>
+
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

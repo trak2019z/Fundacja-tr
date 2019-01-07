@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="http://mjaw.ayz.pl/vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="http://mjaw.ayz.pl/css/styles.css">
+	<link rel="stylesheet" href="http://mjaw.ayz.pl/css/checkbox.css">
+	<link rel="stylesheet" href="http://mjaw.ayz.pl/css/AddPetStyle.css">
+	<link rel="stylesheet" href="http://mjaw.ayz.pl/vendor/fontawesome/css/font-awesome.min.css">
+{% endblock %}
+{% block body %}
+<div class="btn-fav back">
+    <a href="{{ path('account') }}">WSTECZ</a>
+</div>
+        {{ form_start(form) }}
+			<div>
+				{{ form_label(form.imiePracownika, null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.imiePracownika, {'attr': {'class': 'form-base form-input'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.nazwiskoPracownika, null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.nazwiskoPracownika, {'attr': {'class': 'form-base form-input'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.pozycjaPracownika, null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.pozycjaPracownika, {'attr': {'class': 'data form-datepicker'}, 'type' : 'date' }) }}
+			</div>
+			<div>
+				{{ form_label(form.dataUrodzenia, null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.dataUrodzenia, {'attr': {'class': 'data form-datepicker'}, 'type' : 'date' }) }}
+			</div>
+			
+			<div>
+				{{ form_label(form.daneLogowania, null, {'label_attr': {'class': 'form-base'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.daneLogowania['emailUzytkownika'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.daneLogowania['emailUzytkownika'], {'attr': {'class': 'form-base form-input'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.daneLogowania.hasloUzytkownika['first'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.daneLogowania.hasloUzytkownika['first'], {'attr': {'class': 'form-base form-input'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.daneLogowania.hasloUzytkownika['second'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.daneLogowania.hasloUzytkownika['second'], {'attr': {'class': 'form-base form-input'}}) }}
+			</div>
+			
+			<div>
+				{{ form_label(form.checkboxPracownik, null, {'label_attr': {'class': 'form-base'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.checkboxPracownik['checkDodajZwierze'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.checkboxPracownik['checkDodajZwierze'], {'attr': {'class': 'class="switch_1"'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.checkboxPracownik['checkEdycjaZwierzat'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.checkboxPracownik['checkEdycjaZwierzat'], {'attr': {'class': 'class="switch_1"'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.checkboxPracownik['checkUsunZwierze'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.checkboxPracownik['checkUsunZwierze'], {'attr': {'class': 'class="switch_1"'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.checkboxPracownik['checkPrzeniesZwierze'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.checkboxPracownik['checkPrzeniesZwierze'], {'attr': {'class': 'class="switch_1"'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.checkboxPracownik['checkDodajDlug'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.checkboxPracownik['checkDodajDlug'], {'attr': {'class': 'class="switch_1"'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.checkboxPracownik['checkEdycjaDlugow'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.checkboxPracownik['checkEdycjaDlugow'], {'attr': {'class': 'class="switch_1"'}}) }}
+			</div>
+			<div>
+				{{ form_label(form.checkboxPracownik['checkAkceptujRezerwacje'], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.checkboxPracownik['checkAkceptujRezerwacje'], {'attr': {'class': 'class="switch_1"'}}) }}
+			</div>
+        {{ form_end(form) }}
+{% endblock %}

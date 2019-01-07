@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="btn-fav back">
+        <a href="{{ path('wyswietl_zwierzaka', {'id': id }) }}">WSTECZ</a>
+    </div>
+
+    {{ form_start(form) }}
+		<div>
+			{{ form_label(form.daneZwierzaka["nazwaZwierzaka"], null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form.daneZwierzaka["nazwaZwierzaka"], {'attr': {'class': 'form-base form-input'}}) }}
+		</div>		
+		<div>
+			{{ form_label(form.daneZwierzaka["numerZwierzaka"], null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form.daneZwierzaka["numerZwierzaka"], {'attr': {'class': 'form-base form-input'}}) }}
+		</div>		
+		<div>
+			{{ form_label(form.daneZwierzaka["opisZwierzaka"], null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form.daneZwierzaka["opisZwierzaka"], {'attr': {'class': 'form-base form-input'}}) }}
+		</div>		
+		<div>
+			{{ form_label(form.daneZwierzaka["dataUrodzeniaZwierzaka"], null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form.daneZwierzaka["dataUrodzeniaZwierzaka"], {'attr': {'class': 'data form-datepicker'}, 'type' : 'date' }) }}
+		</div>		
+		<div>
+			{{ form_label(form.daneZwierzaka["stanZwierzaka"], null, {'label_attr': {'class': 'form-base'}}) }}
+			{{ form_widget(form.daneZwierzaka["stanZwierzaka"], {'attr': {'class': 'form-base form-input form-select'}}) }}
+		</div>			
+
+        <div id="dataAdopcjiRow" style="display: none">
+			<div>
+				{{ form_label(form.daneZwierzaka["dataAdopcji"], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.daneZwierzaka["dataAdopcji"], {'attr': {'class': 'data form-datepicker'}, 'type' : 'date' }) }}
+			</div>	
+        </div>
+        <div id="dataSmierciRow" style="display: none">
+			<div>
+				{{ form_label(form.daneZwierzaka["dataSmierci"], null, {'label_attr': {'class': 'form-base'}}) }}
+				{{ form_widget(form.daneZwierzaka["dataSmierci"], {'attr': {'class': 'data form-datepicker'}, 'type' : 'date' }) }}
+			</div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+    <script>
+        document.getElementById("edit_pet_daneZwierzaka_stanZwierzaka").onchange = UpdateForm;
+
+        function UpdateForm() {
+            if(document.getElementById("edit_pet_daneZwierzaka_stanZwierzaka").value != "zmarł" ){
+                document.getElementById("dataSmierciRow").style.display = "none";
+            }else {
+                document.getElementById("dataSmierciRow").style.display = "block";
+            }
+
+            if(document.getElementById("edit_pet_daneZwierzaka_stanZwierzaka").value != "adoptowany" ){
+                document.getElementById("dataAdopcjiRow").style.display = "none";
+            }else {
+                document.getElementById("dataAdopcjiRow").style.display = "block";
+            }
+        }
+    </script>
+{% endblock %}

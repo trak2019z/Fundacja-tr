@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="sides">
+        {% for pets in zwierzaki %}
+            <div class="left">
+                <div>
+                    <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                        {{ pets['nazwa'] }}
+                    </label>
+                    <label class="col-md-6" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;">
+                        {{ pets['numer'] }}
+                    </label>
+                </div>
+                <div>
+                    <img src="animals\{{ pets['zdjecie'] }}" alt="zdjecie" style="width:200px; height:150px;"/>
+                </div>
+                <div>
+                    <label class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                        {{ pets['data_ur'] }}
+                    </label>
+                    <label class="col-md-6" style="float: right; padding-left: 0px; padding-right: 0px; width: inherit;">
+                        {{ pets['data_ad'] }}
+                    </label>
+                </div>
+				<br>
+                <div style="text-align: center">
+                    <div class="wiecej">
+                        <a href="{{ path('wyswietl_zwierzaka', {'id': pets['id'] }) }}">WIĘCEJ</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+	<script>
+		var btnContainer = document.getElementById("menu");
+
+		// Get all buttons with class="btn" inside the container
+		var btns = btnContainer.getElementsByClassName("nav-link");
+
+		// Loop through the buttons and add the active class to the current/clicked button
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].className = "nav-link";
+		}
+		btns[2].className = "nav-link active";
+	</script>
+{% endblock %}
