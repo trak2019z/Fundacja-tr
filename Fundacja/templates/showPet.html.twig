@@ -1,192 +1,180 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="sides">
-	<div style="float:left; width:100%;">
-		<div class="pet_box">
-			<div class="col-md-4">
-				<p><h2>{{ zwierzak['imie'] }}</h2></p>
-				<p><div>Numer: <b>{{ zwierzak['numer'] }}</b></div></p>
-				<p>Data urodzenia: {{ zwierzak['data_urodzenia']}} </p>
-				
-				<div>
-				{% if dlug is defined %}
-					<p>Dług wynosi: <span style="color: #990000;">{{ dlug['kwota']}} zł</span></p>
-					<p>Zostało spłacone: <span style="color: #009900;">{{ dlug['splacone'] }} zł</span></p>
-				{% endif %}
-				</div>
-			</div>
-			<div class="col-md-8">
-				<img src="/animals/{{ zwierzak['zdjecie']}}" alt="zdjecie"/>
-			</div>
-		</div>
-        <div style="text-align: center">
-            <p>
-                {% if zwierzak['stan'] == 'adoptowany' %}
-                   <h4>Zwierzak został <b>adoptowany </b> </h4>{{ zwierzak['data_ad'] }}.
+        <div style="float:left; width:100%;">
+            <div class="pet_box">
+                <div class="col-md-4">
+                    <p><h2>{{ zwierzak['imie'] }}</h2></p>
+                    <p><div>Numer: <b>{{ zwierzak['numer'] }}</b></div></p>
+                    <p>Data urodzenia: {{ zwierzak['data_urodzenia']}} </p>
+
+                    <div>
+                        {% if dlug is defined %}
+                            <p>Dług wynosi: <span style="color: #990000;">{{ dlug['kwota']}} zł</span></p>
+                            <p>Zostało spłacone: <span style="color: #009900;">{{ dlug['splacone'] }} zł</span></p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <img src="/animals/{{ zwierzak['zdjecie']}}" alt="zdjecie"/>
+                </div>
+            </div>
+            <div style="text-align: center">
+                <p>
+                    {% if zwierzak['stan'] == 'adoptowany' %}
+                        <h4>Zwierzak został <b>adoptowany </b> </h4>{{ zwierzak['data_ad'] }}.
                     {% elseif zwierzak['stan']  == 'zmarł' %}
                         <h4>Zwierzak <b>odszedł</b></h4> {{ zwierzak['data_zm'] }}.
                     {% elseif zwierzak['stan'] == 'dostępny' %}
-                    <h4 style="color: #05a04f">Zwierzak jest do adopcji.</h4>
+                        <h4 style="color: #05a04f">Zwierzak jest do adopcji.</h4>
+                    {% else %}
+                        <h3 style="color: #1595d2">Zwierzak będzie do adopcji po zakończonym leczeniu.</h3>
+                    {% endif %}
+
                     {% if typ is defined %}
                         {% if typ is same as("guest") %}
-                        {% set zmienna = false %}
-                        {% if ulubione is defined %}
-                            {% for u in ulubione %}
-                                {% if u.id.getPetId() == zwierzak['id']%}
-                                    {% set zmienna = true %}
+                            {% set zmienna = false %}
+                            {% if ulubione is defined %}
+                                {% for u in ulubione %}
+                                    {% if u.id.getPetId() == zwierzak['id']%}
+                                        {% set zmienna = true %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if zmienna == false %}
+                                <div class="btn-fav add">
+                                    <a href="{{ path('dodajDoUlubionych', {'pet': zwierzak['id']}) }}">DODAJ DO ULUBIONYCH</a>
+                                </div>
+                            {% else %}
+                                <div class="btn-fav delete">
+                                    <a href="{{ path('usunZUlubionych', {'pet': zwierzak['id']}) }}">USUŃ Z ULUBIONYCH</a>
+                                </div>
+                            {% endif %}
+                            {% if czyRezerwacja is same as("tak") %}
+                                <h4>Posiadasz <b>zarezerwowanego </b> pupila.</h4>
+                            {% else %}
+                                {% if zarezerwowany is same as("tak")%}
+                                    <h4> Zwierzak jest <p style="color: #aa1f13">zarezerwowany.</p></h4>
+                                {% else %}
+                                    <div class="btn-fav rezerwuj">
+                                        <a href="{{ path('dodajRezerwacje', {'pet': zwierzak['id']}) }}">DODAJ DO REZERWACJI</a>
+                                    </div>
                                 {% endif %}
-                            {% endfor %}
-                        {% endif %}
-
-                        {% if zmienna == false %}
-                            <div class="btn-fav add">
-                                <a href="{{ path('dodajDoUlubionych', {'pet': zwierzak['id']}) }}">DODAJ DO ULUBIONYCH</a>
-                            </div>
-                        {% else %}
-                            <div class="btn-fav delete">
-                                <a href="{{ path('usunZUlubionych', {'pet': zwierzak['id']}) }}">USUŃ Z ULUBIONYCH</a>
-                            </div>
-                        {% endif %}
-                    {% if czyRezerwacja is same as("tak") %}
-                        <h4>Posiadasz <b>zarezerwowanego </b> pupila.</h4>
-                    {% else %}
-                        {% if zarezerwowany is same as("tak")%}
-                            <h4> Zwierzak jest <p style="color: #aa1f13">zarezerwowany.</p></h4>
-                        {% else %}
-                            <div class="btn-fav rezerwuj">
-                                <a href="{{ path('dodajRezerwacje', {'pet': zwierzak['id']}) }}">DODAJ DO REZERWACJI</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-            {% else %}
-                <h3 style="color: #1595d2">Zwierzak będzie do adopcji po zakończonym leczeniu.</h3>
-                {% if typ is same as("guest") %}
-                    {% if czyRezerwacja is same as("tak") %}
-                        <h4>Posiadasz <b>zarezerwowanego </b> pupila.</h4>
-                    {% else %}
-                        {% if zarezerwowany is same as("tak")%}
-                            <h4> Zwierzak jest <p style="color: #aa1f13">zarezerwowany.</p></h4>
-                        {% else %}
-                            <div class="btn-fav rezerwuj">
-                                <a href="{{ path('dodajRezerwacje', {'pet': zwierzak['id']}) }}">DODAJ DO REZERWACJI</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-            </p>
-        </div>
-	<div style="float:left; width:100%;">	
-	<div style="text-align: center; margin-bottom:60px;">
-        <h3>{{ zwierzak['opis'] }}</h3>
-    </div>
-
-    <div>
-        {% if zdjecia is defined %}
-            {% for zd in zdjecia %}
-                <div>
-                    <img src="/animals/{{ zd['zdjecie'] }}" alt="zdjecie" height="200px" width="200px" />
-                    {% if typ is same as("worker")%}
-                        {% if uprawnienia is defined %}
-                            {% if uprawnienia['newsy'] == 1 %}
-							<div class="btn-fav edytuj">
-                                <a href="{{ path('usun_zdjecie', {'id': zd['id']}) }}">USUŃ</a>
-							</div>
-							<div class="btn-fav rezerwuj">
-                                <a href="{{ path('zmienglownezdjecie', {'pic': zd['id']}) }}">GŁÓWNE</a>
-							</div>
                             {% endif %}
                         {% endif %}
                     {% endif %}
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-
-    <div>
-	<div style="background-color:#999; height:2px;width:100%;"></div>
-        {% if dodatkowe is defined %}
-            {% for dod in dodatkowe %}
-                <div style="margin-top:20px;">
-                    <p style="float:right; color: #589be2;">{{ dod['data_n'] }}</p>
-                    {% if dod['tytul'] %}
-                        <h4><b>{{ dod['tytul'] }}</b></h4>
-                    {% endif %}
-                    <p><i> {{ dod['opis'] }}</i></p>
-                    {% if typ is same as("worker") %}
-                        {% if uprawnienia is defined %}
-                            {% if uprawnienia['newsy'] == 1 %}
-							<div class="btn-fav edytuj">
-                                <a href="{{ path('edycja_wpisu', {'id': dod['id']}) }}">EDYTUJ</a>
-							</div>
-							<div class="btn-fav delete">
-                                <a href="{{ path('usuwanie_newsow', {'id': dod['id']}) }}">USUŃ</a>
-							</div>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-				<div style="background-color:#999; height:2px;width:100%;"></div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-
-    <div>
-
-
-        {% if typ is same as("worker") %}
-            {% if uprawnienia['edytujzwierzaka'] == 1 %}
-			<div class="btn-fav edytuj">
-                <a href="{{ path('edycja_zwierzaka', {'id': zwierzak['id'] }) }}">EDYTUJ ZWIERZAKA</a>
-			</div>
-            {% endif %}
-            {% if uprawnienia['usunzwierzaka'] == 1 %}
-			<div class="btn-fav delete">
-                <a href="{{ path('usuniecie_zwierzaka', {'id': zwierzak['id'] }) }}">USUŃ</a>
-			</div>
-            {% endif %}
-            {% if uprawnienia['newsy'] == 1 %}
-			<div class="btn-fav add">
-                <a href="{{ path('dodawanie_wpisu', {'id': zwierzak['id'] }) }}">DODATKOWE INFORMACJE</a>
-			</div>
-			<div class="btn-fav zdjecia">
-                <a href="{{ path('dodaj_zdjecia', {'id': zwierzak['id'] }) }}">ZDJĘCIA</a>
-			</div>
-            {% endif %}
-
-            {% if dlug is defined %}
-                {% if uprawnienia['zmiendlug'] == 1 %}
-				<div class="btn-fav rezerwuj">
-                    <a href="{{ path('edycja_dlugu', {'pet': zwierzak['id']}) }}">EDYTUJ DŁUG</a>
-				</div>
-                {% endif %}
-            {% else %}
-                {% if uprawnienia['dodajdlug'] == 1 %}
-				<div class="btn-fav delete">
-                    <a href="{{ path('dodawanie_dlugu', {'pet': zwierzak['id']}) }}">DODAJ DŁUG</a>
-				</div>
-                {% endif %}
-            {% endif %}
-        {% endif %}
-
-		<div style="text-align: center;">
-            <div class="btn-fav back">
-                {% if zwierzak['stan'] == 'adoptowany' %}
-                    <a href="{{ path('wyswietl_zaadoptowane') }}">WSTECZ</a>
-                {% elseif zwierzak['stan'] == 'zmarł' %}
-                    <a href="{{ path('wyswietl_zmarle') }}">WSTECZ</a>
-                {% else %}
-                    <a href="{{ path('wyswietl_zwierzaki') }}">WSTECZ</a>
-                {% endif %}
+                </p>
             </div>
+            <div style="float:left; width:100%;">
+                <div style="text-align: center; margin-bottom:60px;">
+                    <h3>{{ zwierzak['opis'] }}</h3>
+                </div>
+
+                <div>
+                    {% if zdjecia is defined %}
+                        {% for zd in zdjecia %}
+                            <div>
+                                <img src="/animals/{{ zd['zdjecie'] }}" alt="zdjecie" height="200px" width="200px" />
+                                {% if typ is same as("worker")%}
+                                    {% if uprawnienia is defined %}
+                                        {% if uprawnienia['newsy'] == 1 %}
+                                            <div class="btn-fav edytuj">
+                                                <a href="{{ path('usun_zdjecie', {'id': zd['id']}) }}">USUŃ</a>
+                                            </div>
+                                            <div class="btn-fav rezerwuj">
+                                                <a href="{{ path('zmienglownezdjecie', {'pic': zd['id']}) }}">GŁÓWNE</a>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div>
+                    <div style="background-color:#999; height:2px;width:100%;"></div>
+                    {% if dodatkowe is defined %}
+                        {% for dod in dodatkowe %}
+                            <div style="margin-top:20px;">
+                                <p style="float:right; color: #589be2;">{{ dod['data_n'] }}</p>
+                                {% if dod['tytul'] %}
+                                    <h4><b>{{ dod['tytul'] }}</b></h4>
+                                {% endif %}
+                                <p><i> {{ dod['opis'] }}</i></p>
+                                {% if typ is same as("worker") %}
+                                    {% if uprawnienia is defined %}
+                                        {% if uprawnienia['newsy'] == 1 %}
+                                            <div class="btn-fav edytuj">
+                                                <a href="{{ path('edycja_wpisu', {'id': dod['id']}) }}">EDYTUJ</a>
+                                            </div>
+                                            <div class="btn-fav delete">
+                                                <a href="{{ path('usuwanie_newsow', {'id': dod['id']}) }}">USUŃ</a>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                <div style="background-color:#999; height:2px;width:100%;"></div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div>
+
+
+                    {% if typ is same as("worker") %}
+                        {% if uprawnienia['edytujzwierzaka'] == 1 %}
+                            <div class="btn-fav edytuj">
+                                <a href="{{ path('edycja_zwierzaka', {'id': zwierzak['id'] }) }}">EDYTUJ ZWIERZAKA</a>
+                            </div>
+                        {% endif %}
+                        {% if uprawnienia['usunzwierzaka'] == 1 %}
+                            <div class="btn-fav delete">
+                                <a href="{{ path('usuniecie_zwierzaka', {'id': zwierzak['id'] }) }}">USUŃ</a>
+                            </div>
+                        {% endif %}
+                        {% if uprawnienia['newsy'] == 1 %}
+                            <div class="btn-fav add">
+                                <a href="{{ path('dodawanie_wpisu', {'id': zwierzak['id'] }) }}">DODATKOWE INFORMACJE</a>
+                            </div>
+                            <div class="btn-fav zdjecia">
+                                <a href="{{ path('dodaj_zdjecia', {'id': zwierzak['id'] }) }}">ZDJĘCIA</a>
+                            </div>
+                        {% endif %}
+
+                        {% if dlug is defined %}
+                            {% if uprawnienia['zmiendlug'] == 1 %}
+                                <div class="btn-fav rezerwuj">
+                                    <a href="{{ path('edycja_dlugu', {'pet': zwierzak['id']}) }}">EDYTUJ DŁUG</a>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            {% if uprawnienia['dodajdlug'] == 1 %}
+                                <div class="btn-fav delete">
+                                    <a href="{{ path('dodawanie_dlugu', {'pet': zwierzak['id']}) }}">DODAJ DŁUG</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+                    <div style="text-align: center;">
+                        <div class="btn-fav back">
+                            {% if zwierzak['stan'] == 'adoptowany' %}
+                                <a href="{{ path('wyswietl_zaadoptowane') }}">WSTECZ</a>
+                            {% elseif zwierzak['stan'] == 'zmarł' %}
+                                <a href="{{ path('wyswietl_zmarle') }}">WSTECZ</a>
+                            {% else %}
+                                <a href="{{ path('wyswietl_zwierzaki') }}">WSTECZ</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
     </div>
-	</div>
-	
-	</div>
-	
-    </div>
- 
+
 {% endblock %}
